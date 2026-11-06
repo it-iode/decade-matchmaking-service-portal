@@ -30,12 +30,15 @@ return [
     | your mailers below. You may also add additional mailers if needed.
     |
     | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
-    |            "postmark", "resend", "log", "array",
+    |            "postmark", "resend", "mailchimp", "log", "array",
     |            "failover", "roundrobin"
     |
     */
 
     'mailers' => [
+        'mandrill' => [
+            'transport' => 'mandrill',
+        ],
 
         'smtp' => [
             'transport' => 'smtp',
@@ -77,6 +80,10 @@ return [
 
         'array' => [
             'transport' => 'array',
+        ],
+
+        'mailchimp' => [
+            'transport' => 'mailchimp',
         ],
 
         'failover' => [

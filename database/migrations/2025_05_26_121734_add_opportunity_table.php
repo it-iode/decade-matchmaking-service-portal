@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('opportunities');
         Schema::create('opportunities', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('type'); // Assuming type is a string, adjust if it's an array or JSON
+            $table->string('type');
             $table->date('closing_date');
             $table->string('coverage_activity');
             $table->string('implementation_location');

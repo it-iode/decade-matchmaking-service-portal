@@ -7,16 +7,23 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.1",
+        "diglactic/laravel-breadcrumbs": "^10.0",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.20",
+        "laravel/telescope": "^5.16",
         "laravel/tinker": "^2.10.1",
+        "opcodesio/log-viewer": "^3.19",
+        "spatie/laravel-one-time-passwords": "^1.0",
         "spatie/laravel-permission": "^6.18",
+        "therobfonz/laravel-mandrill-driver": "^6.1",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.0",
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.13",

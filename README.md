@@ -66,8 +66,11 @@ The application will be available at `http://portal_dev.local`
 ### Prerequisites
 
 - PHP 8.2 or higher
+  - php dom extension 
+  - php mysql extension
 - Composer
 - Node.js (16+)
+  - NPM
 - MySQL/PostgreSQL
 - Git
 
@@ -89,12 +92,7 @@ composer install
 npm install
 ```
 
-4. **Environment Configuration**
-```bash
-php artisan key:generate
-```
-
-5. **Configure your database**
+4. **Configure your database**
    - Edit `.env` file and update database credentials:
 ```env
 DB_CONNECTION=mysql
@@ -103,6 +101,13 @@ DB_PORT=3306
 DB_DATABASE=your_database_name
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
+
+APP_KEY=
+```
+
+5. **Environment Configuration**
+```bash
+php artisan key:generate
 ```
 
 6. **Run migrations**
