@@ -127,6 +127,46 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'opportunity' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/opportunity.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+            'replace_placeholders' => true,
+        ],
+
+        'email' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/email.log'),
+            'level' => env('EMAIL_LOG_LEVEL', 'info'),
+            'days' => env('EMAIL_LOG_DAYS', 30),
+            'replace_placeholders' => true,
+        ],
+
+        'email_errors' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/email-errors.log'),
+            'level' => 'error',
+            'days' => env('EMAIL_ERROR_LOG_DAYS', 60),
+            'replace_placeholders' => true,
+        ],
+
+        'requests' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/requests.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+            'replace_placeholders' => true,
+        ],
+
+        'auth' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/auth.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 90, // Keep auth logs for 90 days for security auditing
+            'replace_placeholders' => true,
+        ],
+
     ],
 
 ];
