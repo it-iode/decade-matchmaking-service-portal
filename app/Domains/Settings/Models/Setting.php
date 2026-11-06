@@ -41,6 +41,14 @@ class Setting extends Model
 
     public const MANDRILL_API_KEY = 'mandrill_api_key';
 
+    public const LINKEDIN_CLIENT_ID = 'linkedin_client_id';
+
+    public const LINKEDIN_CLIENT_SECRET = 'linkedin_client_secret';
+
+    public const GOOGLE_CLIENT_ID = 'google_client_id';
+
+    public const GOOGLE_CLIENT_SECRET = 'google_client_secret';
+
     /**
      * Settings that are file uploads
      */
@@ -71,6 +79,10 @@ class Setting extends Model
         self::COMMITTED_FUNDING_METRIC,
         self::OPEN_PARTNER_OPPORTUNITIES_METRIC,
         self::MANDRILL_API_KEY,
+        self::LINKEDIN_CLIENT_ID,
+        self::LINKEDIN_CLIENT_SECRET,
+        self::GOOGLE_CLIENT_ID,
+        self::GOOGLE_CLIENT_SECRET,
     ];
 
     public $timestamps = true;

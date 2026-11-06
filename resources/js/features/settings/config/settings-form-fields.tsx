@@ -140,5 +140,42 @@ export const settingsFormFields: UIStep[] = [
                 description: 'Enter your Mandrill API key for email services.',
             },
         }
+    },
+    {
+        label: 'OAuth Settings',
+        fields: {
+            linkedin_client_id: {
+                id: 'linkedin_client_id',
+                type: 'text',
+                required: false,
+                label: 'LinkedIn Client ID',
+                description: 'Client ID of the LinkedIn OAuth application used for social sign-in.',
+                autoComplete: 'off',
+            },
+            linkedin_client_secret: {
+                id: 'linkedin_client_secret',
+                type: 'password',
+                required: false,
+                label: 'LinkedIn Client Secret',
+                description: 'Client secret of the LinkedIn OAuth application.',
+                autoComplete: 'new-password',
+            },
+            google_client_id: {
+                id: 'google_client_id',
+                type: 'text',
+                required: false,
+                label: 'Google Client ID',
+                description: 'Client ID of the Google OAuth application used for social sign-in.',
+                autoComplete: 'off',
+            },
+            google_client_secret: {
+                id: 'google_client_secret',
+                type: 'password',
+                required: false,
+                label: 'Google Client Secret',
+                description: 'Client secret of the Google OAuth application.',
+                autoComplete: 'new-password',
+            },
+        }
     }
 ]

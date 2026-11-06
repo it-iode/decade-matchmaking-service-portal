@@ -181,6 +181,7 @@ export default function FieldRenderer({
                         required={field.required}
                         value={value ?? ''}
                         placeholder={field.placeholder ?? ''}
+                        autoComplete={field.autoComplete}
                         onChange={handleChange}
                         invalid={!!error}
                     />

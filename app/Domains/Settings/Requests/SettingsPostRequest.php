@@ -65,6 +65,12 @@ class SettingsPostRequest extends FormRequest
             Setting::ORGANIZATIONS_CSV => ['nullable', 'file', 'mimes:csv,txt', 'max:10240'],
             Setting::IOC_PLATFORMS_CSV => ['nullable', 'file', 'mimes:csv,txt', 'max:10240'],
             Setting::MANDRILL_API_KEY => ['nullable', 'string', 'max:255'],
+
+            // OAuth credentials
+            Setting::LINKEDIN_CLIENT_ID => ['nullable', 'string', 'max:255'],
+            Setting::LINKEDIN_CLIENT_SECRET => ['nullable', 'string', 'max:255'],
+            Setting::GOOGLE_CLIENT_ID => ['nullable', 'string', 'max:255'],
+            Setting::GOOGLE_CLIENT_SECRET => ['nullable', 'string', 'max:255'],
         ];
     }
 
@@ -99,6 +105,10 @@ class SettingsPostRequest extends FormRequest
             'request_in_implementation_metric' => 'requests in implementation',
             'open_partner_opportunities_metric' => 'open partner opportunities',
             'ioc_platforms_csv' => 'IOC platforms CSV file',
+            'linkedin_client_id' => 'LinkedIn client ID',
+            'linkedin_client_secret' => 'LinkedIn client secret',
+            'google_client_id' => 'Google client ID',
+            'google_client_secret' => 'Google client secret',
         ];
     }
 }

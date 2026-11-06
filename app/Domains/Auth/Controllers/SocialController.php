@@ -6,6 +6,7 @@ namespace App\Domains\Auth\Controllers;
 
 use App\Domains\Auth\Contracts\AuthenticationServiceInterface;
 use App\Domains\Auth\Exceptions\OAuthAuthenticationException;
+use App\Domains\Auth\Services\OAuthConfigService;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +16,8 @@ use Laravel\Socialite\Facades\Socialite;
 class SocialController extends Controller
 {
     public function __construct(
-        private readonly AuthenticationServiceInterface $authService
+        private readonly AuthenticationServiceInterface $authService,
+        private readonly OAuthConfigService $oauthConfigService
     ) {}
 
     /**
@@ -60,6 +62,8 @@ class SocialController extends Controller
                 'driver' => $driver,
             ]);
 
+            $this->oauthConfigService->applyCredentials($driver);
+
             return Socialite::driver($driver)
                 ->stateless()
                 ->redirect();
@@ -81,6 +85,8 @@ class SocialController extends Controller
     protected function handleProviderCallback(string $driver, string $provider): RedirectResponse
     {
         try {
+            $this->oauthConfigService->applyCredentials($driver);
+
             $socialUser = Socialite::driver($driver)
                 ->stateless()
                 ->user();

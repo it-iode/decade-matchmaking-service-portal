@@ -222,6 +222,10 @@ export interface Settings {
     organizations_csv: string;
     ioc_platforms_csv: string;
     mandrill_api_key: string;
+    linkedin_client_id: string;
+    linkedin_client_secret: string;
+    google_client_id: string;
+    google_client_secret: string;
 }
 
 export interface PaginationLinkProps {

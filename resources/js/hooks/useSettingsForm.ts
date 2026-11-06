@@ -25,6 +25,10 @@ export function useSettingsForm({settings, isEditing = false}: UseSettingsFormPr
         committed_funding_metric: '',
         open_partner_opportunities_metric: '',
         mandrill_api_key:'',
+        linkedin_client_id: '',
+        linkedin_client_secret: '',
+        google_client_id: '',
+        google_client_secret: '',
     };
 
     const form = useForm(initialFormData);

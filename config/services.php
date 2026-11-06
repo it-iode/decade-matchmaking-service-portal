@@ -38,15 +38,17 @@ return [
         'auth_url' => 'https://oceanexpert.org/api/login_check',
         'search_url' =>'https://oceanexpert.org/api/v1/advancedSearch/search.json',
     ],
+    // Client IDs/secrets are managed from the admin settings page (settings table)
+    // and injected at runtime by OAuthConfigService; env values are a fallback.
     'linkedin-openid'=> [
-        'client_id' => env('LINKEDIN_CLIENT_ID', '86xhrmw892wl1w'),
-        'client_secret' => env('LINKEDIN_CLIENT_SECRET', 'WPL_AP1.LaADJ3kCxauZZwyF.4Xggag=='),
+        'client_id' => env('LINKEDIN_CLIENT_ID'),
+        'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
         'redirect' => env('LINKEDIN_REDIRECT_URI', env('APP_URL') . '/auth/linkedin/callback'),
     ],
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID','604432289754-g698iihhp9mufilhp7fgors2fntclmu7.apps.googleusercontent.com'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET','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'),
-        'redirect' => env('GOOGLE_REDIRECT_URI', 'http://localhost:8888/auth/google/callback'),
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI', env('APP_URL') . '/auth/google/callback'),
     ],
 
     'opportunity_click' => [
