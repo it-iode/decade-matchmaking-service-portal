@@ -1,12 +1,16 @@
 /.phpunit.cache
+/deploy-test
 /node_modules
 /public/build
 /public/hot
 /public/storage
 /storage/*.key
+/storage/logs/laravel-deploy.log
+/storage/logs/npm-deploy.log
+/storage/logs/git-deploy.log
 /storage/pail
 /vendor
-.env
+.env.db
 .env.backup
 .env.production
 .phpactor.json
@@ -23,3 +27,5 @@ yarn-error.log
 /.zed
 .editorconfig
 .env.example
+*storybook.log
+storybook-static

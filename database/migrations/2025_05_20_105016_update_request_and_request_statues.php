@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        schema::table('requests', function (Blueprint $table) {	
+        Schema::table('requests', function (Blueprint $table) {
             $table->dropForeign(['status_id']);
             $table->dropColumn(['status_id']);
             $table->unsignedBigInteger('status_id')->nullable(false);
             $table->foreign('status_id')->references('id')->on('request_statuses');
         });
-        schema::table('request_statuses', function (Blueprint $table) {
+        Schema::table('request_statuses', function (Blueprint $table) {
             $table->unique('status_code')->nullable(false);
         });
     }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Domains\Request\Models\Status;
 use Illuminate\Database\Seeder;
-use App\Models\Request\RequestStatus;
 
 class AddRequestStatus extends Seeder
 {
@@ -12,35 +12,35 @@ class AddRequestStatus extends Seeder
      */
     public function run(): void
     {
-        RequestStatus::create([
+        Status::create([
             'status_label' => 'Draft',
             'status_code' => 'draft',
         ]);
-        RequestStatus::create([
+        Status::create([
             'status_label' => 'Under Review',
             'status_code' => 'under_review',
         ]);
-        RequestStatus::create([
+        Status::create([
             'status_label' => 'Validated',
             'status_code' => 'validated',
         ]);
-        RequestStatus::create([
+        Status::create([
             'status_label' => 'Offer made',
             'status_code' => 'offer_made',
         ]);
-        RequestStatus::create([
+        Status::create([
             'status_label' => 'In Implementation',
             'status_code' => 'in_implementation',
         ]);
-        RequestStatus::create([
+        Status::create([
             'status_label' => 'Rejected',
             'status_code' => 'rejected',
         ]);
-        RequestStatus::create([
+        Status::create([
             'status_label' => 'Unmatched',
             'status_code' => 'unmatched',
         ]);
-        RequestStatus::create([
+        Status::create([
             'status_label' => 'Closed',
             'status_code' => 'closed',
         ]);

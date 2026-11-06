@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //$this->userRolesSeeder->run();
-        $this->addRequestStatus->run();
+    //    $this->userRolesSeeder->run();
+      //  $this->addRequestStatus->run();
     }
 }

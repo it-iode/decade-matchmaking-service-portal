@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('request_statuses');
         Schema::create('request_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('status_label')->nullable();
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        schema::table('requests', function (Blueprint $table) {
+        Schema::table('requests', function (Blueprint $table) {
             $table->text('request_data')->nullable();
             $table->unsignedBigInteger('user_id')->nullable(false);
             $table->unsignedBigInteger('matched_partner_id')->nullable();

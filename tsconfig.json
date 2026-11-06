@@ -13,6 +13,11 @@
         "noEmit": true,
         "paths": {
             "@/*": ["./resources/js/*"],
+            "@features/*": ["./resources/js/features/*"],
+            "@ui/*": ["./resources/js/ui/*"],
+            "@pages/*": ["./resources/js/pages/*"],
+            "@shared/*": ["./resources/js/shared/*"],
+            "@layouts/*": ["./resources/js/layouts/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
         }
     },
