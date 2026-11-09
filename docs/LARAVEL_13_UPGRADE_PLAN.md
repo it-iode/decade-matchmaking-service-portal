@@ -1,6 +1,7 @@
 # Laravel 13 + PHP 8.5 Upgrade Plan — Ocean Decade Portal
 
-> Status: planned (2026-11-09). Target: Laravel 13.x (latest, 13.40+) on PHP 8.5.12+.
+> Status: executed on branch `upgrade/laravel-13-php85` (2026-11-09) — Laravel 13.40.0 on PHP 8.5.12, all gates green.
+> Outstanding before merge/deploy: ops runbook below (production PHP 8.5.12+, queue drain). 46 test failures are pre-existing stale tests (tracked separately, identical before/after the upgrade).
 > Verified against the official docs: [Upgrade Guide](https://laravel.com/docs/13.x/upgrade), [Release Notes / Support Policy](https://laravel.com/docs/13.x/releases), and Packagist for every dependency.
 
 ## Context

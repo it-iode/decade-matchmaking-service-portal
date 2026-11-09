@@ -17,7 +17,7 @@ class ValidateEmailTemplatesCommand extends Command
      * @var string
      */
     protected $signature = 'email:validate-templates
-                          {--env=production : Environment to validate against (production, staging, development, local)}
+                          {--environment=production : Environment to validate against (production, staging, development, local)}
                           {--show-missing : Show details about missing templates}';
 
     /**
@@ -32,7 +32,7 @@ class ValidateEmailTemplatesCommand extends Command
      */
     public function handle(EmailTemplateService $emailService, MandrillClient $mandrillClient): int
     {
-        $environment = $this->option('env');
+        $environment = $this->option('environment');
         $showMissing = $this->option('show-missing');
 
         $this->info("Validating email templates for environment: {$environment}");
