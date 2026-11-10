@@ -28,15 +28,19 @@ class TemplateResolver
         $cacheKey = self::CACHE_PREFIX.$eventName;
 
         try {
-            return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($eventName) {
+            // Cache the raw config array, never the EmailTemplate object:
+            // the cache 'serializable_classes' option is disabled.
+            $config = Cache::remember($cacheKey, self::CACHE_TTL, function () use ($eventName) {
                 $config = $this->getTemplateConfig($eventName);
 
                 if ($config === null) {
                     throw TemplateNotFoundException::forEvent($eventName);
                 }
 
-                return EmailTemplate::fromConfig($eventName, $config);
+                return $config;
             });
+
+            return EmailTemplate::fromConfig($eventName, $config);
         } catch (TemplateNotFoundException $e) {
             // Re-throw template not found exceptions
             throw $e;
