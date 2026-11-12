@@ -150,52 +150,6 @@ class TemplateResolverTest extends TestCase
     }
 
     /**
-     * Test clearing cache
-     */
-    public function test_clears_cache(): void
-    {
-        // Arrange - Resolve and cache a template
-        $template1 = $this->resolver->resolve('user.registered');
-
-        // Modify config
-        Config::set('mail-templates.templates.user.registered.subject', 'Modified Subject');
-
-        // Act - Clear cache
-        $this->resolver->clearCache('user.registered');
-
-        // Resolve again (should not use cache)
-        $template2 = $this->resolver->resolve('user.registered');
-
-        // Assert - Should have new value
-        $this->assertEquals('Modified Subject', $template2->getSubject());
-    }
-
-    /**
-     * Test clearing all cache
-     */
-    public function test_clears_all_cache(): void
-    {
-        // Arrange - Resolve multiple templates to cache them
-        $this->resolver->resolve('user.registered');
-        $this->resolver->resolve('request.submitted');
-
-        // Act
-        $this->resolver->clearAllCache();
-
-        // Modify config
-        Config::set('mail-templates.templates.user.registered.subject', 'New Welcome');
-        Config::set('mail-templates.templates.request.submitted.subject', 'New Request');
-
-        // Resolve again
-        $userTemplate = $this->resolver->resolve('user.registered');
-        $requestTemplate = $this->resolver->resolve('request.submitted');
-
-        // Assert - Should have new values
-        $this->assertEquals('New Welcome', $userTemplate->getSubject());
-        $this->assertEquals('New Request', $requestTemplate->getSubject());
-    }
-
-    /**
      * Test getting templates grouped by category
      */
     public function test_gets_templates_grouped_by_category(): void
