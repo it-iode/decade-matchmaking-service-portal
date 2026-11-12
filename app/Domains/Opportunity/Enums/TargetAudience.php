@@ -58,12 +58,38 @@ enum TargetAudience: string
         self::OTHER
     ];
 
+    /**
+     * Audiences that exist only for ODC Travel Support and must not be
+     * offered on the generic opportunity submission form.
+     *
+     * @var list<self>
+     */
+    public const ODC_TRAVEL_SUPPORT_ONLY = [
+        self::LEAST_DEVELOPING_COUNTRIES,
+        self::EARLY_CAREER_OCEAN_PROFESSIONALS,
+    ];
+
     public static function getOptions(): array
     {
         return array_map(
             fn ($case) => ['value' => $case->value, 'label' => $case->label()],
             self::cases()
         );
+    }
+
+    /**
+     * Options for the generic opportunity form: every audience except the
+     * ODC Travel Support-only ones.
+     */
+    public static function getGenericOptions(): array
+    {
+        return array_values(array_map(
+            fn (self $case) => ['value' => $case->value, 'label' => $case->label()],
+            array_filter(
+                self::cases(),
+                fn (self $case) => ! in_array($case, self::ODC_TRAVEL_SUPPORT_ONLY, true)
+            )
+        ));
     }
 
     public static function getOdcTravelSupportOptions(): array
