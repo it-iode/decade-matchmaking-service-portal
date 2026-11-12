@@ -17,6 +17,7 @@ interface OtpVerifyProps {
 }
 
 export default function OtpVerify({ email, maskedEmail }: Readonly<OtpVerifyProps>) {
+    const otpRequestUrl = route('otp.request');
     const [code, setCode] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isResending, setIsResending] = useState(false);
@@ -90,11 +91,11 @@ export default function OtpVerify({ email, maskedEmail }: Readonly<OtpVerifyProp
                     break;
                 case 'not_found':
                 case 'no_email':
-                    router.visit(route('otp.request'));
+                    router.visit(otpRequestUrl);
                     return;
                 case 'origin_mismatch':
                     setError(data.message || 'Security verification failed. Please start over.');
-                    setTimeout(() => router.visit(route('otp.request')), 2000);
+                    setTimeout(() => router.visit(otpRequestUrl), 2000);
                     break;
                 case 'invalid_code':
                 default:
@@ -140,7 +141,7 @@ export default function OtpVerify({ email, maskedEmail }: Readonly<OtpVerifyProp
             <div className="max-w-lg mx-auto mt-8 p-6">
                 {/* Back Navigation */}
                 <Link
-                    href={route('otp.request')}
+                    href={otpRequestUrl}
                     className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-6"
                 >
                     <ChevronLeftIcon className="h-4 w-4 mr-1" />
@@ -265,7 +266,7 @@ export default function OtpVerify({ email, maskedEmail }: Readonly<OtpVerifyProp
 
                         <div>
                             <Link
-                                href={route('otp.request')}
+                                href={otpRequestUrl}
                                 className="text-sm text-gray-600 hover:text-gray-500"
                             >
                                 Use a different email
