@@ -17,6 +17,8 @@ final class OdcTravelSupportPostRequest extends OpportunityPostRequest
 {
     public function authorize(): bool
     {
+        // Submitting requires a signed-in user; the page keeps a guest's
+        // entries client-side while they sign in.
         return $this->user()?->can('createOdcTravelSupport', Opportunity::class) ?? false;
     }
 

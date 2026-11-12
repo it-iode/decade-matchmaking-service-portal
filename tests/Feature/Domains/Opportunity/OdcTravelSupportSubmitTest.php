@@ -34,7 +34,7 @@ class OdcTravelSupportSubmitTest extends TestCase
     }
 
     /**
-     * The payload the home-page dialog sends: no coverage, location, thematic areas or languages.
+     * The payload the submission page sends: no coverage, location, thematic areas or languages.
      *
      * @return array<string, mixed>
      */
@@ -127,10 +127,42 @@ class OdcTravelSupportSubmitTest extends TestCase
         $this->assertDatabaseCount('opportunities', 0);
     }
 
-    public function test_guest_is_redirected_to_login(): void
+    public function test_guest_gets_the_submission_page_and_intended_url_points_back_to_it(): void
+    {
+        // The guest's entries live client-side; after any sign-in method
+        // completes, url.intended brings them back to this page.
+        $this->get(route('opportunity.odc-travel-support.create'))
+            ->assertOk()
+            ->assertInertia(fn (\Inertia\Testing\AssertableInertia $page) => $page
+                ->component('opportunity/OdcTravelSupportCreate')
+                ->has('formOptions.target_audience')
+                // Generated from routes/breadcrumbs.php in the {title, url}
+                // shape the Breadcrumb component reads; Home is the public
+                // landing page for guests.
+                ->has('breadcrumbs', 2)
+                ->where('breadcrumbs.0.title', 'Home')
+                ->where('breadcrumbs.0.url', route('index'))
+                ->where('breadcrumbs.1.title', '2027 ODC Travel Support'))
+            ->assertSessionHas('url.intended', route('opportunity.odc-travel-support.create'));
+    }
+
+    public function test_signed_in_user_gets_the_submission_page_without_touching_intended_url(): void
+    {
+        $this->actingAs(User::factory()->create())
+            ->get(route('opportunity.odc-travel-support.create'))
+            ->assertOk()
+            ->assertInertia(fn (\Inertia\Testing\AssertableInertia $page) => $page
+                ->component('opportunity/OdcTravelSupportCreate')
+                ->has('formOptions.target_audience')
+                ->has('breadcrumbs', 2)
+                ->where('breadcrumbs.0.url', route('user.home')))
+            ->assertSessionMissing('url.intended');
+    }
+
+    public function test_guest_cannot_submit_and_nothing_is_created(): void
     {
         $this->post(route('opportunity.odc-travel-support.submit'), $this->reducedPayload())
-            ->assertRedirect();
+            ->assertRedirect(route('sign.in'));
 
         $this->assertDatabaseCount('opportunities', 0);
     }
