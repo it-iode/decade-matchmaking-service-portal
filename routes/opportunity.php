@@ -13,11 +13,18 @@ use App\Domains\Opportunity\Models\Opportunity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// One-page ODC travel support submission (issue #218). Open to guests: the
+// page carries the opportunity form plus sign-in options, and keeps a guest's
+// entries client-side while they sign in.
+Route::get('opportunity/odc-travel-support/create', [OdcTravelSupportController::class, 'create'])
+    ->name('opportunity.odc-travel-support.create');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('opportunity/list', ListController::class)->name('opportunity.list');
     Route::get('opportunity/show/{opportunity}', ShowController::class)->name('opportunity.show');
-    // Any signed-in user may submit an ODC travel support opportunity (issue #218).
-    Route::post('opportunity/odc-travel-support/submit', OdcTravelSupportController::class)
+    // Open to any signed-in user, not only partners (issue #218).
+    Route::post('opportunity/odc-travel-support/submit', [OdcTravelSupportController::class, 'store'])
+        ->middleware('throttle:10,1')
         ->name('opportunity.odc-travel-support.submit');
 });
 

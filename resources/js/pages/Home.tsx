@@ -18,18 +18,17 @@ import ActionSection, { ActionCardData } from '@features/home/components/action-
 import {Reveal} from "@shared/motion";
 import {ODCTravelSupportSection} from "@features/odc-travel-support";
 import React from "react";
-import {Opportunity, OpportunityFormOptions} from "@features/opportunities";
+import {Opportunity} from "@features/opportunities";
 
 type HomePageProps = {
     userGuide?: string;
     partnerGuide?: string;
     odcTravelSupport?: Opportunity[];
-    formOptions?: OpportunityFormOptions;
     /** Whether the ODC travel support section is enabled in portal settings. Defaults to shown. */
     showOdcTravelSupport?: boolean;
 }
 
-export default function Home({ userGuide, partnerGuide, odcTravelSupport, formOptions, showOdcTravelSupport = true}: Readonly<HomePageProps>) {
+export default function Home({ userGuide, partnerGuide, odcTravelSupport, showOdcTravelSupport = true}: Readonly<HomePageProps>) {
     const { auth } = usePage<{ auth: Auth }>().props;
 
     // Helper function to check if user has access (either is_user or is_partner)
@@ -124,7 +123,7 @@ export default function Home({ userGuide, partnerGuide, odcTravelSupport, formOp
                 <WelcomeSection user={auth.user} />
                 {showOdcTravelSupport && (
                     <Reveal>
-                        <ODCTravelSupportSection opportunities={odcTravelSupport} formOptions={formOptions} />
+                        <ODCTravelSupportSection opportunities={odcTravelSupport} />
                     </Reveal>
                 )}
                 {/* Getting Started Guides */}
