@@ -10,6 +10,8 @@ use App\Domains\Opportunity\Models\Opportunity;
 use App\Domains\Opportunity\Requests\OpportunityPostRequest;
 use App\Domains\Opportunity\Resources\OpportunityResource;
 use App\Domains\Opportunity\Services\OpportunityService;
+use App\Domains\Settings\Models\Setting;
+use App\Domains\Settings\Services\SettingsService;
 use App\Shared\Enums\Country;
 use App\Shared\Enums\Language;
 use App\Shared\Enums\Ocean;
@@ -21,7 +23,10 @@ use Throwable;
 
 class FormController extends BaseOpportunitiesController
 {
-    public function __construct(private readonly OpportunityService $opportunityService) {}
+    public function __construct(
+        private readonly OpportunityService $opportunityService,
+        private readonly SettingsService $settingsService,
+    ) {}
 
     /**
      * @throws Throwable
@@ -41,11 +46,18 @@ class FormController extends BaseOpportunitiesController
                 'Create a new Opportunity to get started.'
             );
         }
+        $showOdcTravelSupport = filter_var(
+            $this->settingsService->getSetting(Setting::SHOW_ODC_TRAVEL_SUPPORT_SECTION, true),
+            FILTER_VALIDATE_BOOLEAN
+        );
+
         $pageProps['formOptions'] = [
             'countries' => Country::getOptions(),
             'regions' => Region::getOptions(),
             'oceans' => Ocean::getOptions(),
-            'target_audience' => TargetAudience::getOptions(),
+            'target_audience' => $showOdcTravelSupport
+                ? TargetAudience::getOptions()
+                : TargetAudience::getGenericOptions(),
             'opportunity_types' => Type::getOptions(),
             'coverage_activity' => CoverageActivity::getOptions(),
             'thematic_areas' => ThematicAreas::getOptions(),
