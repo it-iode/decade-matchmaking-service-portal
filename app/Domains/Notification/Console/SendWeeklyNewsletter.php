@@ -40,7 +40,7 @@ class SendWeeklyNewsletter extends Command
         try {
             // Check if newsletter was recently sent (within last 6 days) unless forced
             if (! $force) {
-                $lastSend = Cache::get('newsletter:last_send_date');
+                $lastSend = NewsletterService::parseLastSendDate(Cache::get('newsletter:last_send_date'));
                 if ($lastSend && now()->diffInDays($lastSend) < 6) {
                     $this->warn('⚠️  Newsletter was sent recently. Use --force to override.');
                     $this->info("Last sent: {$lastSend->diffForHumans()}");
@@ -63,8 +63,8 @@ class SendWeeklyNewsletter extends Command
             $this->info('📧 Dispatching weekly opportunities newsletters...');
             $stats = $newsletterService->sendWeeklyNewsletter();
 
-            // Store last send timestamp and stats
-            Cache::put('newsletter:last_send_date', now(), now()->addDays(14));
+            // Store last send timestamp and stats (scalar only: cache 'serializable_classes' is disabled)
+            Cache::put('newsletter:last_send_date', now()->toIso8601String(), now()->addDays(14));
             Cache::put('newsletter:last_send_stats', $stats, now()->addDays(14));
 
             // Display results

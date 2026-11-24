@@ -67,15 +67,24 @@ set +e
 GIT_EXIT_CODE=$?
 set -e
 
-if [[ $GIT_EXIT_CODE -eq 200 ]]; then
-  echo "[$(date '+%F %T')] No changes to deploy — skipping Laravel/NPM steps."
-  echo "[$(date '+%F %T')] Deploy finished OK (no-op)"
-  exit 0
-elif [[ $GIT_EXIT_CODE -ne 0 ]]; then
+if [[ $GIT_EXIT_CODE -ne 0 && $GIT_EXIT_CODE -ne 200 ]]; then
   echo "[$(date '+%F %T')] Git operations FAILED with exit code $GIT_EXIT_CODE"
   exit $GIT_EXIT_CODE
 fi
 echo "[$(date '+%F %T')] done git operations..."
+
+# Rebuild .env on EVERY run, including "no changes" runs: a previous deploy
+# interrupted between the git step and the env rebuild would otherwise leave a
+# broken .env in place with no deploy ever repairing it.
+echo "[$(date '+%F %T')] Rebuilding .env..."
+"$SCRIPT_DIR/env-deploy.sh" "$APP_DIR" "$ENVIRONMENT"
+echo "[$(date '+%F %T')] done .env rebuild..."
+
+if [[ $GIT_EXIT_CODE -eq 200 ]]; then
+  echo "[$(date '+%F %T')] No changes to deploy — skipping Laravel/NPM steps."
+  echo "[$(date '+%F %T')] Deploy finished OK (no-op)"
+  exit 0
+fi
 # Execute Laravel and NPM operations in parallel
 echo "[$(date '+%F %T')] Running Laravel and NPM operations in parallel..."
 

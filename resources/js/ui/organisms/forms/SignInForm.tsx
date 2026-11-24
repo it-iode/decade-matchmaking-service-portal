@@ -13,6 +13,8 @@ interface SignInFormProps {
     showOtpOption?: boolean;
     onOtpClick?: () => void;
     isOtpProcessing?: boolean;
+    /** Overrides the wrapper spacing (defaults to the full-page `mt-10`). */
+    className?: string;
 }
 
 type LoginForm = {
@@ -27,6 +29,7 @@ export default function SignInForm({
     showOtpOption = true,
     onOtpClick,
     isOtpProcessing = false,
+    className,
 }: Readonly<SignInFormProps>) {
 
     const UISignInForm: { email: UIField; password: UIField } = {
@@ -70,7 +73,7 @@ export default function SignInForm({
     const showDivider = showOAuthOptions || (showOtpOption && onOtpClick);
 
     return (
-        <div className="mt-10 sm:mx-auto sm:w-full">
+        <div className={`sm:mx-auto sm:w-full ${className ?? 'mt-10'}`}>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <FieldRenderer
                     name="email"
@@ -115,10 +118,10 @@ export default function SignInForm({
             {showDivider && (
                 <div className="relative mt-10">
                     <div aria-hidden="true" className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-gray-200"/>
+                        <div className="w-full border-t border-gray-200 dark:border-gray-700"/>
                     </div>
                     <div className="relative flex justify-center text-sm/6 font-medium">
-                        <span className="bg-white px-6 text-gray-900">
+                        <span className="bg-white px-6 text-gray-900 dark:bg-gray-800 dark:text-gray-100">
                             Or continue with
                         </span>
                     </div>

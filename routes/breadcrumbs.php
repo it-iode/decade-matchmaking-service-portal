@@ -86,6 +86,11 @@ try {
         $trail->push('My submitted opportunities', route('me.opportunity.list'));
         $trail->push('Edit Opportunity', route('opportunity.edit', request('opportunity')));
     });
+    // Open to guests, so Home points at the public landing page for them.
+    Breadcrumbs::for('opportunity.odc-travel-support.create', function (BreadcrumbTrail $trail) {
+        $trail->push('Home', auth()->check() ? route('user.home') : route('index'));
+        $trail->push('2027 ODC Travel Support', route('opportunity.odc-travel-support.create'));
+    });
 } catch (\Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException $e) {
 
 }

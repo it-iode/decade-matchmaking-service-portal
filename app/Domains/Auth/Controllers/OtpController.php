@@ -148,7 +148,10 @@ class OtpController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'OTP verified successfully.',
-                'redirect' => route('user.home'),
+                // Honor url.intended (like the credentials and OAuth logins) so
+                // flows interrupted by the auth middleware, or started from a
+                // page with on-page sign-in, land back where they left off.
+                'redirect' => redirect()->intended(route('user.home'))->getTargetUrl(),
             ]);
         } catch (OtpAuthenticationException $e) {
             // Laravel auto-renders via exception's render() method

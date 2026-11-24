@@ -106,7 +106,7 @@ export default function ODCTravelSupportList({ opportunities, interactive }: Rea
         <div className="overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
             <div className={clsx(gridClasses, 'border-b border-gray-200 bg-gray-50 py-2.5 text-xs font-medium text-gray-500 dark:border-gray-700 dark:bg-gray-800/60 dark:text-gray-400')}>
                 <div className="col-span-6">Opportunity</div>
-                <div className="col-span-3">Organiser</div>
+                <div className="col-span-3">Sponsoring Organization</div>
                 <div className="col-span-2">Closing date</div>
                 <div className="col-span-1" />
             </div>

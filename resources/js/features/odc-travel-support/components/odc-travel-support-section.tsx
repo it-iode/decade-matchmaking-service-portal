@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Button } from '@ui/primitives/button';
 import { ArrowUpTrayIcon, ChevronRightIcon, ListBulletIcon } from '@heroicons/react/16/solid';
 import { Auth } from '@/types';
-import { Opportunity, OpportunityFormOptions } from '@features/opportunities/types';
+import { Opportunity } from '@features/opportunities/types';
 import { ODC_TRAVEL_SUPPORT_TYPE } from '../config/odc-travel-support-form-fields';
 import ODCTravelSupportList from './odc-travel-support-list';
-import ODCTravelSupportUploadDialog from './odc-travel-support-upload-dialog';
 
 interface ODCTravelSupportSectionProps {
     opportunities?: Opportunity[];
-    formOptions?: OpportunityFormOptions;
 }
 
-export default function ODCTravelSupportSection({ opportunities = [], formOptions }: Readonly<ODCTravelSupportSectionProps>) {
+export default function ODCTravelSupportSection({ opportunities = [] }: Readonly<ODCTravelSupportSectionProps>) {
     const { auth } = usePage<{ auth: Auth }>().props;
     const isSignedIn = Boolean(auth?.user);
-    const [showUploadDialog, setShowUploadDialog] = useState(false);
 
     // Only ODC travel support sorted by closing date, soonest first. The backend pre-filters; this is a defensive fallback.
     const openOpportunities = [...opportunities]
@@ -54,7 +51,7 @@ export default function ODCTravelSupportSection({ opportunities = [], formOption
                         <ListBulletIcon data-slot="icon" aria-hidden="true" />
                         See active 2027 ODC travel support
                     </Button>
-                    <Button outline onClick={() => setShowUploadDialog(true)}>
+                    <Button outline href={route('opportunity.odc-travel-support.create')}>
                         <ArrowUpTrayIcon data-slot="icon" aria-hidden="true" />
                         Upload a 2027 ODC travel support opportunity
                     </Button>
@@ -78,12 +75,6 @@ export default function ODCTravelSupportSection({ opportunities = [], formOption
             <ODCTravelSupportList
                 opportunities={openOpportunities}
                 interactive={isSignedIn}
-            />
-
-            <ODCTravelSupportUploadDialog
-                open={showUploadDialog}
-                onClose={() => setShowUploadDialog(false)}
-                formOptions={formOptions}
             />
         </section>
     );

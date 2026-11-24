@@ -8,6 +8,7 @@
 /storage/logs/laravel-deploy.log
 /storage/logs/npm-deploy.log
 /storage/logs/git-deploy.log
+/storage/logs/env-deploy.log
 /storage/pail
 /vendor
 .env.db
@@ -29,3 +30,4 @@ yarn-error.log
 .env.example
 *storybook.log
 storybook-static
+.env

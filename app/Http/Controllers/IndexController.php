@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Domains\Opportunity\Enums\TargetAudience;
 use App\Domains\Opportunity\Enums\Type;
 use App\Domains\Opportunity\Resources\OpportunityResource;
 use App\Domains\Opportunity\Services\OpportunityService;
@@ -63,9 +62,6 @@ class IndexController extends Controller
             'recentOpportunities' => $recentOpportunities->toResourceCollection(OpportunityResource::class),
             'odcTravelSupport' => $odcTravelSupport,
             'showOdcTravelSupport' => $showOdcTravelSupport,
-            'formOptions' => [
-                'target_audience' => TargetAudience::getOdcTravelSupportOptions(),
-            ],
         ]);
     }
 }

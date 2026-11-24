@@ -8,7 +8,9 @@ use App\Domains\Opportunity\Enums\Type;
 use App\Domains\Opportunity\Services\OpportunityQueryBuilder;
 use App\Domains\User\Models\User;
 use App\Infrastructure\Email\Jobs\SendTransactionalEmail;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
@@ -220,8 +222,30 @@ class NewsletterService
     {
         return [
             'subscribed_users' => $this->subscribedAudience()->count(),
-            'last_send' => cache()->get('newsletter:last_send_date'),
+            'last_send' => self::parseLastSendDate(cache()->get('newsletter:last_send_date')),
             'last_send_stats' => cache()->get('newsletter:last_send_stats', []),
         ];
+    }
+
+    /**
+     * The cache stores the last-send date as an ISO-8601 string (cache
+     * 'serializable_classes' is disabled); entries written before that
+     * change may still hold a Carbon object until their TTL expires.
+     */
+    public static function parseLastSendDate(mixed $value): ?CarbonInterface
+    {
+        if ($value instanceof CarbonInterface) {
+            return $value;
+        }
+
+        if (is_string($value) && $value !== '') {
+            try {
+                return Carbon::parse($value);
+            } catch (\Throwable) {
+                return null;
+            }
+        }
+
+        return null;
     }
 }

@@ -6,15 +6,15 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.5",
         "barryvdh/laravel-dompdf": "^3.1",
         "diglactic/laravel-breadcrumbs": "^10.0",
         "inertiajs/inertia-laravel": "^2.0",
-        "laravel/framework": "^12.0",
+        "laravel/framework": "^13.0",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.20",
         "laravel/telescope": "^5.16",
-        "laravel/tinker": "^2.10.1",
+        "laravel/tinker": "^3.0",
         "opcodesio/log-viewer": "^3.19",
         "spatie/laravel-one-time-passwords": "^1.0",
         "spatie/laravel-permission": "^6.18",
@@ -30,7 +30,7 @@
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^11.5.3"
+        "phpunit/phpunit": "^12.0"
     },
     "autoload": {
         "psr-4": {

@@ -51,7 +51,8 @@ class SessionController extends Controller
                 ->intended('/home')
                 ->with('status', 'You are logged in successfully.');
         } catch (OceanExpertAuthenticationException|Exception) {
-            return to_route('sign.in')
+            // back() keeps the user on the page they signed in from.
+            return back()
                 ->with('error', 'Login failed. Your Ocean Expert account may not yet be approved, or your ID or password is incorrect.')
                 ->withInput($request->only('email'));
         }

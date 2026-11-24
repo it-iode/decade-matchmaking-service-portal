@@ -51,6 +51,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Session Serialization
+    |--------------------------------------------------------------------------
+    |
+    | Sessions are serialized as JSON (hardened Laravel 13 default) to help
+    | prevent PHP deserialization gadget chain attacks. The application only
+    | stores scalar values in the session. Switching this value invalidates
+    | all active sessions, forcing users to sign in again.
+    |
+    */
+
+    'serialization' => env('SESSION_SERIALIZATION', 'json'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Session File Location
     |--------------------------------------------------------------------------
     |

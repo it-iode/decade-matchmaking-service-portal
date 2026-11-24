@@ -64,6 +64,6 @@ export const TARGET_AUDIENCE_DETAILS: Record<string, OptionDetail> = {
     },
     'youth': {
         description:
-            'those persons between 15 and 24 years old. Note that participants younger than 18 years old may need to be accompanied by a legal guardian or parent.',
+            'Those persons between 15 and 24 years old. Note that parental or legal guardian consent and on-site supervision will be required for participants under 18 years of age.',
     },
 };
