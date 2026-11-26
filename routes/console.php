@@ -47,7 +47,8 @@ Schedule::command('model:prune', [
 // Queue health check every 5 minutes
 Schedule::command('queue:health-check')
     ->everyFiveMinutes()
-    ->runInBackground();
+    ->runInBackground()
+    ->appendOutputTo(storage_path('logs/queue-health.log'));
 
 // Close expired opportunities daily at 2:00 AM
 Schedule::command('opportunities:close-expired --force')

@@ -25,7 +25,6 @@ echo "Environment: $ENVIRONMENT"
 # Install composer dependencies
 echo "Installing composer dependencies..."
 $COMPOSER install --prefer-dist --no-interaction --optimize-autoloader
-$COMPOSER  dump-autoload
 echo "Clearing caches..."
 $PHP artisan config:clear
 $PHP artisan event:clear
@@ -44,5 +43,10 @@ $PHP artisan ziggy:generate
 $PHP artisan storage:link
 # Restart queue workers so they pick up the newly deployed code
 $PHP artisan queue:restart
+# Release any stale schedule withoutOverlapping mutexes (a crashed queue:work run
+# can leave its mutex behind for up to 24h, silently skipping that scheduled task)
+$PHP artisan schedule:clear-cache || true
+# Dump queue state (pending/failed jobs per queue, queue config) into this deploy log
+$PHP artisan queue:diagnose || true
 
 echo "[$(date '+%F %T')] Laravel operations completed successfully"

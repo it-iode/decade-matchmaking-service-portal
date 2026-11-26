@@ -129,9 +129,9 @@ class AppServiceProvider extends ServiceProvider
         // Event listeners are discovered from app/Domains/*/Listeners and app/Infrastructure/*/Listeners
         // (see bootstrap/app.php); commands from app/Domains/*/Console and app/Infrastructure/*/Console.
 
-        if (app()->environment('production') && config('services.opportunity_click.ip_pepper') === '') {
-            \Log::warning('OPPORTUNITY_CLICK_IP_PEPPER is empty in production; opportunity click IP hashes are not peppered.');
-        }
+        //if (app()->environment('production') && config('services.opportunity_click.ip_pepper') === '') {
+        //    \Log::warning('OPPORTUNITY_CLICK_IP_PEPPER is empty in production; opportunity click IP hashes are not peppered.');
+        //}
     }
 
     /**
